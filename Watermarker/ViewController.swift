@@ -59,16 +59,17 @@ class ViewController: UIViewController {
     }
     
     @objc private func saveImage(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: AnyObject) {
-        if error != nil{
-            let alert  = UIAlertController(title: "Success", message: "Save success", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }else{
+        if error != nil {
             let alert  = UIAlertController(title: "Error", message: error!.localizedDescription, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
-            }
+            
+        } else {
+            let alert  = UIAlertController(title: "Success", message: "Save success", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
+    }
     
     @IBAction func onSaveImageClick(_ sender: Any) {
         UIImageWriteToSavedPhotosAlbum(imageWatermarkCore.getWatermarkedImage(), self, #selector(self.saveImage(image:didFinishSavingWithError:contextInfo:)), .none)
